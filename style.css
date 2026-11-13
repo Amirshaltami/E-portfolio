@@ -260,6 +260,7 @@ nav {
     margin: 0 auto;
     cursor: pointer;
     z-index: 10;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .project__img {
@@ -309,8 +310,8 @@ nav {
     margin-right: 16px;
 }
 
-/* Desktop mouse-only hover triggers (prevents sticky hover on touchscreens) */
-@media (hover: hover) {
+/* Desktop mouse-only hover triggers (pointer: fine stops iOS Safari from sticking hover after a tap) */
+@media (hover: hover) and (pointer: fine) {
     .project__wrapper:hover .project__img {
         transform: scale(1.07);
         filter: blur(5px);
@@ -641,10 +642,10 @@ footer {
     color: #242424;
 }
 
-/* Pins the 9 decorative SVG shapes across a 3x3 grid behind the main content so they always stay visible without blocking taps */
+/* Pins the 9 decorative SVG shapes (circles, triangles, squigglies, semi-circles) above the section background and behind the text on all devices */
 .shape {
     position: fixed;
-    z-index: 1;
+    z-index: 5;
     pointer-events: none;
 }
 .shape--0 {
@@ -711,7 +712,7 @@ footer {
     }
 }
 
-/* Scales down titles, shapes, and project overlay text so everything (including half-circles) stays visible and fits cleanly on small phone screens */
+/* Scales down titles, shapes, and project overlay text so everything (circles, triangles, squigglies, semi-circles) stays visible and fits cleanly on small phone screens */
 @media (max-width: 480px) {
     .title {
         font-size: 48px;
@@ -723,7 +724,8 @@ footer {
         display: none;
     }
     .shape {
-        width: 14px;
+        width: 16px;
+        height: 16px;
     }
     .project__description {
         left: 20px;
