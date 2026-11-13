@@ -77,6 +77,8 @@ nav {
     margin: 0 auto;
     padding: 0 20px;
     height: 90px;
+    position: relative;
+    z-index: 10;
 }
 
 #personal-logo {
@@ -137,6 +139,7 @@ nav {
     width: 100%;
     max-width: 1200px;
     padding: 0 20px;
+    z-index: 10;
 }
 
 .header__content {
@@ -196,6 +199,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 10;
 }
 
 .scroll {
@@ -203,6 +207,7 @@ nav {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
+    z-index: 10;
 }
 
 .scroll__icon {
@@ -238,6 +243,8 @@ nav {
     text-align: center;
     font-size: 48px;
     margin-bottom: 60px;
+    position: relative;
+    z-index: 10;
 }
 
 .project {
@@ -252,6 +259,7 @@ nav {
     max-width: 850px;
     margin: 0 auto;
     cursor: pointer;
+    z-index: 10;
 }
 
 .project__img {
@@ -301,19 +309,33 @@ nav {
     margin-right: 16px;
 }
 
-/* Blurs the project image, darkens the background, and slides the description text up on desktop hover OR mobile/tablet tap */
-.project__wrapper:hover .project__img,
+/* Desktop mouse-only hover triggers (prevents sticky hover on touchscreens) */
+@media (hover: hover) {
+    .project__wrapper:hover .project__img {
+        transform: scale(1.07);
+        filter: blur(5px);
+    }
+
+    .project__wrapper:hover .project__wrapper--bg {
+        opacity: 0.7;
+    }
+
+    .project__wrapper:hover .project__description {
+        opacity: 1;
+        transform: translateY(-50%);
+    }
+}
+
+/* Mobile & tablet tap-to-toggle triggers (tap once to open, tap again to close) */
 .project__wrapper--active .project__img {
     transform: scale(1.07);
     filter: blur(5px);
 }
 
-.project__wrapper:hover .project__wrapper--bg,
 .project__wrapper--active .project__wrapper--bg {
     opacity: 0.7;
 }
 
-.project__wrapper:hover .project__description,
 .project__wrapper--active .project__description {
     opacity: 1;
     transform: translateY(-50%);
@@ -558,6 +580,8 @@ nav,
 footer {
     background-color: #242424;
     padding: 6% 0;
+    position: relative;
+    z-index: 10;
 }
 
 .footer__row {
@@ -617,9 +641,11 @@ footer {
     color: #242424;
 }
 
-/* Pins the 9 decorative SVG shapes across a 3x3 grid on the screen */
+/* Pins the 9 decorative SVG shapes across a 3x3 grid behind the main content so they always stay visible without blocking taps */
 .shape {
     position: fixed;
+    z-index: 1;
+    pointer-events: none;
 }
 .shape--0 {
     top: 15vh;
@@ -658,13 +684,6 @@ footer {
     left: 80vw;
 }
 
-/* Hides floating shapes on tablets and phones so they never overlap headings on touchscreens */
-@media (max-width: 1024px) {
-    .shape {
-        display: none;
-    }
-}
-
 /* Adjusts hero font sizes, stacks the modal halves vertically, and fits project descriptions cleanly on tablets */
 @media (max-width: 768px) {
     .title {
@@ -692,7 +711,7 @@ footer {
     }
 }
 
-/* Scales down titles and project overlay text even further so everything fits cleanly on small phone screens */
+/* Scales down titles, shapes, and project overlay text so everything (including half-circles) stays visible and fits cleanly on small phone screens */
 @media (max-width: 480px) {
     .title {
         font-size: 48px;
@@ -702,6 +721,9 @@ footer {
     }
     .nav__link:first-child {
         display: none;
+    }
+    .shape {
+        width: 14px;
     }
     .project__description {
         left: 20px;
