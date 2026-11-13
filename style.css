@@ -1,3 +1,4 @@
+/* Imports the Roboto font from Google Fonts and resets default browser spacing so layout sizing is predictable */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap');
 
 * {
@@ -5,9 +6,6 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
-}
-html{
-    scroll-behavior: smooth;
 }
 
 li {
@@ -28,11 +26,13 @@ button {
     border: none;
 }
 
+/* Sets the default light-gray page background and smoothly animates color changes when switching themes */
 section {
     background-color: rgb(245, 245, 245);
     transition: all 300ms ease;
 }
 
+/* Centers page sections and gives clickable buttons/icons a subtle grow-on-hover and shrink-on-click bounce */
 .container {
     padding: 50px 0;
     width: 100%;
@@ -58,7 +58,7 @@ section {
     transform: scale(0.8);
 }
 
-/* Landing Page Container */
+/* Makes the opening landing section fill 100% of the viewport height */
 #landing-page {
     height: 100vh;
     min-height: 600px;
@@ -67,7 +67,7 @@ section {
     flex-direction: column;
 }
 
-/* Navigation */
+/* Top navigation bar layout and logo/link styling */
 nav {
     display: flex;
     justify-content: space-between;
@@ -99,7 +99,7 @@ nav {
     font-weight: 700;
 }
 
-/* Link Underline Hover Animations */
+/* Creates the sliding underline animation underneath navigation and footer links when hovered */
 .link__hover-effect {
     position: relative;
 }
@@ -128,7 +128,7 @@ nav {
     width: 100%;
 }
 
-/* Header Content */
+/* Positions your main hero greeting ("Hey I'm Amir."), bio paragraph, and blue circular social icons in the center */
 .header {
     position: absolute;
     top: 56%;
@@ -182,7 +182,7 @@ nav {
     border-radius: 50%;
 }
 
-/* Fixed Overlay Elements */
+/* Styles the round floating mail button in the bottom-right and the bouncing mouse-wheel scroll indicator at the bottom */
 .mail__btn {
     width: 60px;
     height: 60px;
@@ -190,14 +190,12 @@ nav {
     border-radius: 50%;
     background-color: #242424;
     color: white;
-    position: fixed;
+    position: absolute;
     bottom: 32px;
     right: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 100;
-    box-shadow: 0 12px 30px 0 rgb(0,0,0,0.28);
 }
 
 .scroll {
@@ -235,7 +233,7 @@ nav {
     }
 }
 
-/* Projects Section */
+/* Styles the project card container, dark overlay, and hidden project description text */
 .section__title {
     text-align: center;
     font-size: 48px;
@@ -253,6 +251,7 @@ nav {
     overflow: hidden;
     max-width: 850px;
     margin: 0 auto;
+    cursor: pointer;
 }
 
 .project__img {
@@ -260,7 +259,6 @@ nav {
     transition: all 600ms ease;
 }
 
-/* Dark Background Overlay */
 .project__wrapper--bg {
     position: absolute;
     top: 0;
@@ -272,7 +270,6 @@ nav {
     transition: opacity 450ms ease;
 }
 
-/* Text Description Container */
 .project__description {
     position: absolute;
     top: 50%;
@@ -304,22 +301,25 @@ nav {
     margin-right: 16px;
 }
 
-/* Hover Triggers */
-.project__wrapper:hover .project__img {
+/* Blurs the project image, darkens the background, and slides the description text up on desktop hover OR mobile/tablet tap */
+.project__wrapper:hover .project__img,
+.project__wrapper--active .project__img {
     transform: scale(1.07);
     filter: blur(5px);
 }
 
-.project__wrapper:hover .project__wrapper--bg {
+.project__wrapper:hover .project__wrapper--bg,
+.project__wrapper--active .project__wrapper--bg {
     opacity: 0.7;
 }
 
-.project__wrapper:hover .project__description {
+.project__wrapper:hover .project__description,
+.project__wrapper--active .project__description {
     opacity: 1;
     transform: translateY(-50%);
 }
 
-/* Modal Section */
+/* Controls the pop-up About/Contact modal container and makes its left and right halves slide together when "modal--open" is active */
 .modal {
     position: absolute;
     top: 50%;
@@ -376,7 +376,7 @@ nav {
     line-height: 1.75;
 }
 
-/* Modal Languages Layout & Scaling */
+/* Arranges the HTML, CSS, JavaScript, and React logos in a row and pops up their labels on hover */
 .modal__languages {
     display: flex;
     justify-content: space-between;
@@ -426,7 +426,7 @@ nav {
     transform: translateX(110%);
 }
 
-/* Contact Form & Overlays */
+/* Styles the contact form inputs, blue submit button, loading spinner screen, green success screen, and top-right "X" close icon */
 input, textarea {
     width: 100%;
     background-color: #242424;
@@ -537,6 +537,7 @@ input:focus, textarea:focus {
     }
 }
 
+/* Smoothly fades out the background header, navbar, and scroll icon while the modal is open */
 nav,
 .scroll,
 .header {
@@ -553,12 +554,10 @@ nav,
     transition: all 400ms 200ms;
 }
 
-/* Footer Section */
+/* Styles the dark footer at the bottom of the page */
 footer {
     background-color: #242424;
     padding: 6% 0;
-    display:flex;
-    position:relative;
 }
 
 .footer__row {
@@ -586,7 +585,7 @@ footer {
     font-size: 16px;
 }
 
-/* Dark Theme */
+/* Overrides page backgrounds and text colors to dark mode whenever <body> has the "dark-theme" class */
 .dark-theme .title,
 .dark-theme .section__title,
 .dark-theme .section__sub--title,
@@ -617,94 +616,111 @@ footer {
     background-color: white;
     color: #242424;
 }
-/* shapes shapes on the first row height = 35 vh
-shapes on the second row 
-height = 70vh
- */
- .shape{
-    position:fixed;
- }
- .shape--0{
+
+/* Pins the 9 decorative SVG shapes across a 3x3 grid on the screen */
+.shape {
+    position: fixed;
+}
+.shape--0 {
     top: 15vh;
     left: 5vw;
- }
- .shape--1{
+}
+.shape--1 {
     top: 15vh;
     left: 50vw;
- }
- .shape--2{
+}
+.shape--2 {
     top: 15vh;
     left: 80vw;
- }
- .shape--3{
+}
+.shape--3 {
     top: 50vh;
     left: 5vw;
- }
- .shape--4{
+}
+.shape--4 {
     top: 50vh;
     left: 50vw;
- }
- .shape--5{
+}
+.shape--5 {
     top: 50vh;
     left: 80vw;
- }
- .shape--6{
+}
+.shape--6 {
     top: 80vh;
     left: 5vw;
- }
- .shape--7{
+}
+.shape--7 {
     top: 80vh;
     left: 50vw;
- }
- .shape--8{
+}
+.shape--8 {
     top: 80vh;
     left: 80vw;
- }
- @media (max-width: 768px){
-    .title{
-        font-size: 80px;
+}
+
+/* Hides floating shapes on tablets and phones so they never overlap headings on touchscreens */
+@media (max-width: 1024px) {
+    .shape {
+        display: none;
+    }
+}
+
+/* Adjusts hero font sizes, stacks the modal halves vertically, and fits project descriptions cleanly on tablets */
+@media (max-width: 768px) {
+    .title {
+        font-size: 64px;
     }
     .header--para {
-        font-size: 20px;
+        font-size: 18px;
     }
-    .modal{
-        top:0;
-        left:0;
+    .modal {
+        top: 0;
+        left: 0;
+        transform: none;
         height: auto;
-        transform:none;
         width: 100%;
         flex-direction: column-reverse;
         border-radius: 0;
     }
-    .modal__half{
-        width:100%;
+    .modal__half {
+        width: 100%;
+        padding: 40px 28px;
     }
- }
- @media(max-width: 480px){
-    title{
-        font-size: 52px;
+    .project__description {
+        left: 32px;
+        max-width: 85%;
     }
-    .header__para{
-        font-size: 18px;
+}
 
+/* Scales down titles and project overlay text even further so everything fits cleanly on small phone screens */
+@media (max-width: 480px) {
+    .title {
+        font-size: 48px;
     }
-    .nav__link:first-child{
+    .header--para {
+        font-size: 16px;
+    }
+    .nav__link:first-child {
         display: none;
     }
-    .project__description--para{
-        display:none;
+    .project__description {
+        left: 20px;
+        right: 20px;
+        max-width: none;
     }
-    .project__description{
-        left: 0;
-        padding: 0;
-        width: 100%;
-        text-align: center;
+    .project__description--title {
+        font-size: 20px;
     }
-    .project__description--sub-title{
-        margin-bottom: 8px;
+    .project__description--sub-title {
+        font-size: 12px;
+        margin-top: 4px;
     }
-    .modal__half{
-        padding:40px;
+    .project__description--para {
+        font-size: 12px;
+        margin: 8px 0;
+        line-height: 1.4;
     }
+    .project__description--link {
+        font-size: 16px;
     }
- 
+}

@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Sets up page character encoding, mobile screen scaling, browser tab title, stylesheets, and icons -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amir Shaltami E-Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Loads the EmailJS library and connects your personal EmailJS account key so the contact form can send real emails -->
     <script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/@emailjs/browser@5/dist/email.min.js">
     </script>
@@ -18,7 +21,10 @@
     </script>
 </head>
 <body>
+    <!-- Full-screen landing section; moving the mouse here triggers moveBackground() to shift the floating shapes -->
     <section id="landing-page" onmousemove="moveBackground(event)">
+        
+        <!-- Top navigation bar with your logo and clickable links to open the modal, scroll to projects, or toggle dark mode -->
         <nav>
             <img id="personal-logo" src="./assets/logo.jpg" alt="Amir Shaltami Logo">
             <figure>
@@ -39,14 +45,16 @@
                 </li>
             </ul>
         </nav>
+
+        <!-- Center hero introduction with your name, original bio paragraph, and LinkedIn, GitHub, and Resume buttons -->
         <header class="header">
             <div class="header__content">
                 <h1 class="title">Hey</h1>
                 <h1 class="title title--secondary">I'm Amir.</h1>
                 <p class="header--para">
-                    I'm a <b class="blue">Frontend Software Engineer</b> with a strong passion for building web applications with great user experiences.
+                    I'm a <b class="blue">Frontend Software Engineer</b> who turns ideas into fast, responsive, and intuitive web applications.
                     <br>
-                    Here's a bit more <b class="blue click" onclick="toggleModal()">about me</b>.
+                    Click to learn a little more <b class="blue click" onclick="toggleModal()">about me</b>.
                 </p>
                 <div class="social__list">
                     <a href="https://www.linkedin.com/in/ashaltami" target="_blank" class="social__link click">
@@ -61,13 +69,20 @@
                 </div>
             </div>
         </header>
+
+        <!-- Floating mail button in the bottom-right corner that opens the About/Contact modal -->
         <button class="mail__btn click" onclick="toggleModal()">
             <i class="fa-solid fa-envelope"></i>
         </button>
+
+        <!-- Animated mouse-wheel scroll indicator at the bottom center that jumps down to the Projects section -->
         <a href="#projects" class="scroll">
             <div class="scroll__icon click"></div>
         </a>
+
+        <!-- Two-part pop-up modal (hidden off-screen until toggleModal() adds "modal--open" to the body) -->
         <div class="modal">
+            <!-- Left half of the modal: your personal bio and tech stack icons -->
             <div class="modal__half modal__about">
                 <h3 class="modal__title modal__title--about">Here's a bit about me.</h3>
                 <h4 class="modal__sub-title modal__sub-title--about">Frontend Software Engineer</h4>
@@ -95,6 +110,8 @@
                     </figure>
                 </div>
             </div>
+
+            <!-- Right half of the modal: the close "X" button, EmailJS contact form, loading spinner, and success message -->
             <div class="modal__half modal__contact">
                 <i class="fa-solid fa-times modal__exit click" onclick="toggleModal()"></i>
                 <h3 class="modal__title modal__title--contact">
@@ -128,6 +145,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- Decorative background SVG shapes positioned around the screen that react to mouse movement on desktop -->
         <img src="./assets/semi circle.svg" class="shape shape--0">
         <img src="./assets/circle.svg" class="shape shape--1">
         <img src="./assets/squiggly.svg" class="shape shape--2">
@@ -137,9 +156,9 @@
         <img src="./assets/squiggly.svg" class="shape shape--6">
         <img src="./assets/circle.svg" class="shape shape--7">
         <img src="./assets/semi circle.svg" class="shape shape--8">
-        
     </section>
 
+    <!-- Projects showcase section; clicking/tapping the card calls toggleProject() so mobile/tablet users can reveal the details -->
     <section id="projects">
         <div class="container">
             <div class="row">
@@ -148,7 +167,7 @@
                 </h1>
                 <ul class="project__list">
                     <li class="project">
-                        <div class="project__wrapper">
+                        <div class="project__wrapper" onclick="toggleProject(this)">
                             <img src="./assets/blinker mockup.png" class="project__img" alt="Project Mockup">
                             <div class="project__wrapper--bg"></div>
                             <div class="project__description">
@@ -177,6 +196,7 @@
         </div>
     </section>
 
+    <!-- Bottom footer with your logo, quick external/modal links, and copyright notice -->
     <footer>
         <div class="container">
             <div class="row footer__row">
@@ -196,6 +216,7 @@
         </div>
     </footer>
 
+    <!-- Loads your JavaScript file at the very end so all HTML elements above exist before scripts run -->
     <script src="index.js"></script>
 </body>
 </html>

@@ -1,11 +1,15 @@
+// Your personal EmailJS IDs used to route contact form submissions to your inbox
 // template_nwo8nct
 // service_8u8b71e
 // KBr4JSFK8sSy6lwSp
+
+// Controls how far the background shapes move relative to your mouse cursor (1/20th of the mouse distance)
 const scaleFactor = 1 / 20;
-// Think of this variable like a light switch.
-// It starts as "false" (meaning dark mode is currently OFF when the page loads).
+
+// Tracks whether dark mode is currently ON (true) or OFF (false)
 let contrastToggle = false;
 
+// Runs whenever the mouse moves over the landing page, gently shifting all 9 background shapes in alternating directions
 function moveBackground(event) {
   const shapes = document.querySelectorAll(".shape");
   const x = event.clientX * scaleFactor;
@@ -18,25 +22,17 @@ function moveBackground(event) {
   }
 }
 
-// This function runs every time you click the half-circle contrast icon in the navbar.
+// Flips dark mode on and off when you click the half-circle contrast icon in the navbar
 function toggleContrast() {
-  // The "!" flips the switch to the opposite of whatever it currently is:
-  // If it was false, it becomes true. If it was true, it becomes false.
   contrastToggle = !contrastToggle;
-
-  // Check if the switch is now ON (true):
   if (contrastToggle) {
-    // Stick the "dark-theme" label onto the <body> tag in HTML.
-    // Once <body> has this label, all your ".dark-theme ..." rules in style.css automatically turn on!
-    // (Note the space before dark-theme so it doesn't mash into other class names.)
     document.body.classList += " dark-theme";
   } else {
-    // If the switch is now OFF (false), peel the "dark-theme" label off <body>
-    // so the page goes right back to its normal light colors.
     document.body.classList.remove("dark-theme");
   }
 }
 
+// Intercepts the contact form submission, shows the loading spinner, sends the email via EmailJS, and shows a success or error state
 function contact(event) {
   event.preventDefault();
   const loading = document.querySelector('.modal__overlay--loading');
@@ -59,6 +55,7 @@ function contact(event) {
     });
 }
 
+// Tracks whether the About/Contact modal is currently open and slides both halves in or out when clicked
 let isModalOpen = false;
 function toggleModal() {
   if (isModalOpen) {
@@ -67,4 +64,9 @@ function toggleModal() {
   }
   isModalOpen = true;
   document.body.classList += " modal--open";
+}
+
+// Toggles the project overlay open and closed when a user taps the project card on a phone or tablet
+function toggleProject(element) {
+  element.classList.toggle("project__wrapper--active");
 }
