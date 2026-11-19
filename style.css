@@ -642,7 +642,7 @@ footer {
     color: #242424;
 }
 
-/* Pins the 9 decorative SVG shapes (circles, triangles, squigglies, semi-circles) above the section background and behind the text on desktop */
+/* Pins the 9 decorative SVG shapes (circles, triangles, squigglies, semi-circles) above the section background and behind the text on laptops/desktops */
 .shape {
     position: fixed;
     z-index: 5;
@@ -685,11 +685,15 @@ footer {
     left: 80vw;
 }
 
-/* Adjusts hero font sizes, hides background shapes, stacks the modal halves vertically, and fits project descriptions cleanly on tablets */
-@media (max-width: 768px) {
+/* Hides background shapes on phones and tablets (1024px and below) while keeping them on laptops */
+@media (max-width: 1024px) {
     .shape {
         display: none;
     }
+}
+
+/* Adjusts hero font sizes, stacks the modal halves vertically, and fits project descriptions cleanly on tablets */
+@media (max-width: 768px) {
     .title {
         font-size: 64px;
     }
